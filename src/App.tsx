@@ -1,11 +1,12 @@
 import React from "react";
+import { Todos } from "./container/Todos";
 
 
 
 const App: React.FC = () => {
   return (
     <>
-     <h1>HEllo TS</h1>
+     <Todos />
     </>
   );
 };
