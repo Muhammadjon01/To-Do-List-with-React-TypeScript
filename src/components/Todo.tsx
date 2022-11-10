@@ -1,6 +1,12 @@
 import React from 'react';
+import {ITodos} from "../interface"
 
-export const Todo: React.FC<{text: string}> = ({text}): JSX.Element =>{
+// type TodoProps = {
+//     todos: ITodos[];
+//     deleteTodo:(id: number) => void;
+// }
+
+export const Todo: React.FC<{text: string, deleteTodo: any }> = ({text, deleteTodo}): JSX.Element =>{
     return (
         <div className="w-full flex flex-col rounded">
             <div className="w-full text-start flex flex-wrap justify-between border-b-2">
@@ -12,7 +18,7 @@ export const Todo: React.FC<{text: string}> = ({text}): JSX.Element =>{
                 <div className="space-x-2 mt-4 items-end text-white">
                     <button>Complete</button>
                     <button>Edit</button>
-                    <button>Delete</button>
+                    <button onClick={deleteTodo}>Delete</button>
                 </div>
             </div>
         </div>
