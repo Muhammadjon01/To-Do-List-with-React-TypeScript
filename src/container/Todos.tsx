@@ -54,6 +54,10 @@ export const Todos: React.FC = () => {
     setStatus("all")
   }
 
+  const activeStatus = ()=> {
+    setStatus("active")
+  }
+
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("todos") || "[]") as ITodos[];
 
@@ -97,7 +101,7 @@ export const Todos: React.FC = () => {
               </button>
               <button
                 className="rounded px-2 py-2   hover:bg-gray-500/50"
-               
+                onClick={activeStatus}
               >
                 Active
               </button>
@@ -117,6 +121,21 @@ export const Todos: React.FC = () => {
             {status === "all" &&
             todos.length > 0 &&
               todos.map((elem) => {
+                return (
+                  <Todo
+                    key={elem.id}
+                    text={elem.text}
+                    isCompleted={elem.isCompleted}
+                    deleteTodo={() => deleteTodo(elem.id)}
+                    completeTodo={() => completeTodo(elem.id)}
+                  />
+                );
+              })}
+            
+            {status === "active" &&
+            todos.length > 0 &&
+              todos.filter((elem) => !elem.isCompleted)
+              .map((elem) => {
                 return (
                   <Todo
                     key={elem.id}
