@@ -6,6 +6,7 @@ import { ITodos } from "../interface";
 export const Todos: React.FC = () => {
   const [text, setText] = useState<string>("");
   const [todos, setTodos] = useState<ITodos[]>([]);
+  const [status, setStatus] = useState<"all" | "active" | "complete">("all")
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
@@ -23,6 +24,15 @@ export const Todos: React.FC = () => {
     setText("");
   };
 
+  // const keyPressHandle = (event:React.KeyboardEvent) => {
+  //   console.log("brn")
+  //   if(event.key === "Enter"){
+  //     console.log("drn")
+  //     addTodo()
+  //     setText('')
+  //   }
+  // }
+
   const completeTodo = (id: number) => {
     let updateTodo = todos.map((elem) => {
       if (elem.id == id) {
@@ -39,6 +49,10 @@ export const Todos: React.FC = () => {
     let filterTodos = todos.filter((elem) => elem.id !== id);
     setTodos(filterTodos);
   };
+
+  const allStatus = ()=> {
+    setStatus("all")
+  }
 
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("todos") || "[]") as ITodos[];
@@ -69,16 +83,39 @@ export const Todos: React.FC = () => {
           <button
             className="rounded text-white bg-cyan-500 hover:bg-cyan-600 p-2"
             onClick={addTodo}
+            // onKeyPress={keyPressHandle}
           >
             Add
           </button>
         </div>
+        <div className="flex  space-x-2">
+              <button
+                className="rounded-lg px-2 py-1  hover:bg-gray-500/50"
+                onClick={allStatus}
+              >
+                All
+              </button>
+              <button
+                className="rounded px-2 py-2   hover:bg-gray-500/50"
+               
+              >
+                Active
+              </button>
+              <button
+                className="rounded px-2 py-1   hover:bg-gray-500/50"
+                
+              >
+                Complete
+              </button>
+              
+            </div>
         <div className="lg:w-[50%]  bg-white rounded mx-auto py-5 my-10">
           <div className="bg-white space-y-2 md:mx-auto mx-auto my-4 px-4">
             <h1 className="text-4xl text-center text-red-400 font-bold border-b-2">
               Here is your task!
             </h1>
-            {todos.length > 0 &&
+            {status === "all" &&
+            todos.length > 0 &&
               todos.map((elem) => {
                 return (
                   <Todo
