@@ -14,6 +14,7 @@ export const Todo: React.FC<{
   deleteTodo: any;
   completeTodo: any;
 }> = ({ text, isCompleted, deleteTodo, completeTodo }): JSX.Element => {
+    
   return (
     <div className="w-full flex flex-col rounded">
       <div className="w-full text-start flex flex-wrap justify-between border-b-2">

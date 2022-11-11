@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Todo } from "../components/Todo";
 import { ITodos } from "../interface";
 
@@ -40,6 +40,16 @@ export const Todos: React.FC = () => {
     setTodos(filterTodos);
   };
 
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("todos") || "[]") as ITodos[];
+
+    setTodos(saved);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
   return (
     <div className="w-full h-screen bg-gradient-to-r from-green-400 to-blue-500">
       <div className="w-[60%] h-screen bg-white-600  m-auto">
@@ -65,7 +75,7 @@ export const Todos: React.FC = () => {
         </div>
         <div className="lg:w-[50%]  bg-white rounded mx-auto py-5 my-10">
           <div className="bg-white space-y-2 md:mx-auto mx-auto my-4 px-4">
-            <h1 className="text-4xl text-red-400 font-bold border-b-2">
+            <h1 className="text-4xl text-center text-red-400 font-bold border-b-2">
               Here is your task!
             </h1>
             {todos.length > 0 &&
@@ -80,6 +90,9 @@ export const Todos: React.FC = () => {
                   />
                 );
               })}
+            {todos.length === 0 && (
+              <p className="text-center text-2xl">There is no any task!</p>
+            )}
           </div>
         </div>
       </div>
