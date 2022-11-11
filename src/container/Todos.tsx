@@ -96,7 +96,7 @@ export const Todos: React.FC = () => {
             Add
           </button>
         </div>
-        <div className="flex  space-x-2">
+        <div className="flex  space-x-2 my-10">
           <button
             className="rounded-lg px-2 py-1  hover:bg-gray-500/50"
             onClick={allStatus}
