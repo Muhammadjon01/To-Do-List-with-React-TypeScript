@@ -16,12 +16,24 @@ export const Todos: React.FC = () => {
     const newTodos: ITodos = {
       id: new Date().getTime(),
       text: text,
-      completed: false,
+      isCompleted: false,
     };
     console.log("Dbhsa");
     setTodos((prev) => [newTodos, ...prev]);
     setText("");
   };
+
+  const completeTodo = (id: number) => {
+    let updateTodo = todos.map((elem) => {
+      if(elem.id == id) {
+        elem.isCompleted = !elem.isCompleted;
+        return elem;
+      }
+      return elem;
+    })
+
+    setTodos(updateTodo)
+  }
 
   const deleteTodo = (id: number) => {
     let filterTodos = todos.filter((elem) => elem.id !== id);
@@ -61,7 +73,9 @@ export const Todos: React.FC = () => {
                 <Todo
                   key={elem.id}
                   text={elem.text}
+                  isCompleted = {elem.isCompleted}
                   deleteTodo={() => deleteTodo(elem.id)}
+                  completeTodo = {() => completeTodo(elem.id)}
                 />
               );
             })}
