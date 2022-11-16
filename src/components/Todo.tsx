@@ -3,10 +3,6 @@ import { ITodos } from "../interface";
 import { AiFillDelete } from "react-icons/ai";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 
-// type TodoProps = {
-//     todos: ITodos[];
-//     deleteTodo:(id: number) => void;
-// }
 
 export const Todo: React.FC<{
   text: string;
