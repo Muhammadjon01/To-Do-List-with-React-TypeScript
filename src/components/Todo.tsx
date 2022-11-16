@@ -11,8 +11,8 @@ import { IoCheckmarkDoneCircle } from "react-icons/io5";
 export const Todo: React.FC<{
   text: string;
   isCompleted: boolean;
-  deleteTodo: any;
-  completeTodo: any;
+  deleteTodo: () => void;
+  completeTodo: () => void;
 }> = ({ text, isCompleted, deleteTodo, completeTodo }): JSX.Element => {
   return (
     <div className="w-full flex flex-col rounded">
